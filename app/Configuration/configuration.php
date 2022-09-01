@@ -6,7 +6,7 @@
     /*Nombre del servidor*/
     define('HOST','localhost');
     /*Nombre de la base de datos*/
-    define('DBNAME','crud');
+    define('DBNAME','prueba_solati');
     /*Nombre del usuario*/
     define('USER','root');
     /*Contraseña del usuario*/

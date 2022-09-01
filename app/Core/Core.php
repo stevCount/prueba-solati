@@ -35,7 +35,7 @@ Class Core{
 	public function __Construct(){
 
 		/* Variable que inicia la url con la que esta en el navegador.*/
-		$url = $this ->getUrl();
+		$url = $this->getUrl();
 
 		//-------------------------------------------------------------------------
 	  /*Funcion de control para controlar si existe el archivo del controlador*/
@@ -91,13 +91,12 @@ Class Core{
 	 * los caracteres y separando con los '/'.
 	 */
 	public function getUrl(){
-		
 		/*Imprime la url que esta en el navegador.
 		print $_GET['url'];*/
 		/*Funcion de control que verifica si exista una url*/
-		if (isset($_GET['url'])) {
+		if (isset($_SERVER['REQUEST_URI'])) {
 			/*rtrim acorta los espacios hacia la derecha con '/' */
-			$url = rtrim($_GET['url'], '/');
+			$url = rtrim($_SERVER['REQUEST_URI'], '/');
 			/**Caracter que se evalua '/' para cortar espacios,
 			*Se valida la url, FILTER_SANITIZE_URL ayuda a interpretarlo
 			*como url
