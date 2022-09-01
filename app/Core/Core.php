@@ -7,6 +7,8 @@
  * 3-Parametros
  * Ejemplo/Articulo/actualizar/4
  */
+const CONTROLLER_INDEX = 2;
+const FUNCTION_INDEX = 3;
 Class Core{
 	/**
 	 * [$controladorActual description]
@@ -32,19 +34,21 @@ Class Core{
 	 * 
 	 * Array 0= metodo, 1 = Metodo, 2= Parametro
 	 */
-	public function __Construct(){
+	public function __construct(){
 
 		/* Variable que inicia la url con la que esta en el navegador.*/
 		$url = $this->getUrl();
 
 		//-------------------------------------------------------------------------
-	  /*Funcion de control para controlar si existe el archivo del controlador*/
-	  if (file_exists('../app/Controller/' .ucwords($url[0]).'.php')) {
-	  	/*Si existe se configura como controlador por defecto*/
-	  	$this->controladorActual= ucwords($url[0]);
-	  	/*hacemos un unset del indice 0 para desmontar el controlador actual, por ejemplo paginas*/
-	  	unset($url[0]);
-	  	}//fin if.
+	  	/*Funcion de control para controlar si existe el archivo del controlador*/
+		if(in_array(2,$url)){
+			if (file_exists('../app/Controller/' .ucwords($url[CONTROLLER_INDEX]).'.php')) {
+				/*Si existe se configura como controlador por defecto*/
+				$this->controladorActual= ucwords($url[CONTROLLER_INDEX]);
+				/*hacemos un unset del indice 0 para desmontar el controlador actual, por ejemplo paginas*/
+				unset($url[CONTROLLER_INDEX]);
+			}//fin if.
+		}
 
 
 		/*funcion para imprimir como formatea la url
@@ -62,11 +66,11 @@ Class Core{
 		**
 		*/
 		//--------------------------------------------------------------------------
-		if (isset($url[1])){
-				if (method_exists($this->controladorActual, $url[1])) {
+		if (isset($url[FUNCTION_INDEX])){
+				if (method_exists($this->controladorActual, $url[FUNCTION_INDEX])) {
 				/*Si se cargo se chequea el metodo.*/
-				$this->metodoActual=$url[1];
-				unset($url[1]);
+				$this->metodoActual=$url[FUNCTION_INDEX];
+				unset($url[FUNCTION_INDEX]);
 			}//fin if2.
 		}//fin if1.
 		//----------------------------------------------------------------------------
